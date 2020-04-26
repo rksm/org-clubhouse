@@ -535,7 +535,9 @@ If set to nil, will never create stories with labels")
           (-map (lambda (cell) (cons (cdr cell) (car cell)))
                 org-clubhouse-state-alist)))
     (or (alist-get-equal state-name inv-state-name-alist)
-        (if state-name (s-upcase state-name) "UNKNOWN"))))
+        (if state-name
+            (s-replace-all '((" " . "_")) (s-upcase state-name))
+          "UNKNOWN"))))
 
 ;;;
 ;;; Prompting
